@@ -24,8 +24,8 @@ function build() {
 
     pushd "$SRC_DIR"
 
-    export ELECTRON_MIRROR=https://npm.taobao.org/mirrors/electron/
-    pnpm install --registry=https://registry.npm.taobao.org
+ #   export ELECTRON_MIRROR=https://registry.npmmirror.com/
+    pnpm install 
     pnpm run build
     cp -RT out/linux-unpacked/resources $APP_DIR/files/resources
     mkdir -p "$APP_DIR/files/userscripts"

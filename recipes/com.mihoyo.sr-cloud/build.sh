@@ -1,23 +1,21 @@
-export PACKAGE="com.mihoyo.ys-cloud"
-export NAME="Cloud Genshin"
-export NAME_CN="云·原神"
+export PACKAGE="com.mihoyo.sr-cloud"
+export NAME="Honkai:Star Rail CloudGame"
+export NAME_CN="云·崩坏星穹铁道"
 export VERSION="1.0.0"
 export ARCH="all"
-export URL="icon.png::https://ys.mihoyo.com/cloud/img/logo_home_header.82e54fa5.png"
+export URL="icon.png::https://webstatic.mihoyo.com/common/clgm-web-app/sr/img/logo_home_header.d98f2de5.png"
 export DO_NOT_UNARCHIVE=1
 # autostart,notification,trayicon,clipboard,account,bluetooth,camera,audio_record,installed_apps
 export REQUIRED_PERMISSIONS=""
-
-export HOMEPAGE="https://ys.mihoyo.com/cloud/"
-# export DEPENDS="libgconf-2-4, libgtk-3-0, libnotify4, libnss3, libxtst6, xdg-utils, libatspi2.0-0, libdrm2, libgbm1, libxcb-dri3-0, kde-cli-tools | kde-runtime | trash-cli | libglib2.0-bin | gvfs-bin, deepin-elf-verify"
+export INGREDIENTS=(nodejs)
+export HOMEPAGE="https://sr.mihoyo.com/cloud/#/" # wrapper content
 export DEPENDS="com.electron"
-export BUILD_DEPENDS="npm"
+#export BUILD_DEPENDS="npm"
 export SECTION="misc"
 export PROVIDE=""
 export DESC1="Electron wrapper for $HOMEPAGE"
 export DESC2=""
 
-export INGREDIENTS=(nodejs)
 
 function build() {
     cp "$ROOT_DIR/templates/index.js" "$SRC_DIR/index.js"
@@ -26,9 +24,8 @@ function build() {
 
     pushd "$SRC_DIR"
 
-#    export ELECTRON_MIRROR=https://registry.npmmirror.com/
-    pnpm install 
-    pnpm run build
+    npm install
+    npm run build
     cp -RT out/linux-unpacked/resources $APP_DIR/files/resources
     mkdir -p "$APP_DIR/files/userscripts"
     cp "$ROOT_DIR"/*.js "$APP_DIR/files/userscripts/"
